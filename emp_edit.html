@@ -1,0 +1,50 @@
+<div>
+<form name="myForm">
+  <h3 >Edit Employee:</h3>
+
+     <img src="{{img_path}}" width="80" height="80">
+      <br>
+    <label>Name:</label>
+    <input class="w3-input w3-border" type="text" ng-model="name"  placeholder="Name">
+  <br>
+    <label>Title:</label>
+    <input class="w3-input w3-border" type="text" ng-model="title"  placeholder="Title">
+  <br>
+    <label>Phone:</label>
+    <input class="w3-input w3-border" type="text" ng-model="phone" placeholder="Phone">
+  <br>
+    <label>Email:</label>
+    <input class="w3-input w3-border" type="text" ng-model="email" placeholder="Email">
+  <br>
+   <label>Manager:</label>
+    <!-- <input class="w3-input w3-border" type="text" ng-model="manager" placeholder="Manager"> -->
+    <select  ng-model="manager">
+    <option ng-selected="manager!='none'" value="{{manager}}">{{manager.split('-')[0]}}</option>
+    <option ng-show="manager!='none'" value="none">none</option>
+    <option ng-repeat="res in result" value="{{res.name}}-{{res.id}}">{{res.name}}</option>
+    
+      
+    </select>
+  <br>
+   <label>Change Photo?</label>
+    <input type="checkbox" ng-model="changePhoto">
+    </br>
+  <label ng-show = "changePhoto">Photo:</label>
+   <input ng-show = "changePhoto" type="file" ngf-select ng-model="picFile" name="file"    
+             accept="image/*" ngf-max-size="2MB" required
+             ngf-model-invalid="errorFile">
+             <i ng-show="myForm.file.$error.maxSize">File too large 
+          {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+
+  <br>
+  <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb" width="42" height="42"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+      <br>
+
+  <button class="btn btn-primary" ng-disabled="error || incomplete " ng-click="upDate(picFile)">&#10004; Save Changes</button>
+</form>
+
+
+
+
+
+</div>

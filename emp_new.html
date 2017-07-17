@@ -1,0 +1,39 @@
+<div>
+<form name="myForm">
+  <h3 >Create New Employee:</h3>
+  
+    <label>Name:</label>
+    <input class="w3-input w3-border" type="text" ng-model="name"  placeholder="Name">
+  <br>
+    <label>Title:</label>
+    <input class="w3-input w3-border" type="text" ng-model="title"  placeholder="Title">
+  <br>
+    <label>Phone:</label>
+    <input class="w3-input w3-border" type="text" ng-model="phone" placeholder="Phone">
+  <br>
+    <label>Email:</label>
+    <input class="w3-input w3-border" type="text" ng-model="email" placeholder="Email">
+  <br>
+   <label>Manager:</label>
+    <!-- <input class="w3-input w3-border" type="text" ng-model="manager" placeholder="Manager"> -->
+    <select  ng-model="manager" ng-init="manager ='none'">
+    <option value="none">none</option>
+    <option ng-repeat="sel in selection" value="{{sel.name}}-{{sel.id}}">{{sel.name}}</option>
+    
+      
+    </select>
+    <br>
+  <label>Photo:</label>
+   <input type="file" ngf-select ng-model="picFile" name="file"    
+             accept="image/*" ngf-max-size="2MB" required
+             ngf-model-invalid="errorFile">
+             <i ng-show="myForm.file.$error.maxSize">File too large 
+          {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+
+  <br>
+  <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb" width="42" height="42"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+      <br>
+  <button class="btn btn-primary" ng-disabled="error || incomplete || !myForm.$valid" ng-click="upDate(picFile)">&#10004; Save Changes</button>
+</form>
+
+</div>

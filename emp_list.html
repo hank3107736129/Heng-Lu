@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="input_text.css">
+<div>
+<div class="container" id="list-wrapper]">
+
+<h3>Employees</h3>
+
+
+ 
+<form>
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon" id="sizing-addon2">Search</span>
+        <input type="text" placeholder="Search Employees" ng-model="searchEmp" aria-describedby="sizing-addon2">
+      </div>      
+    </div>
+  </form>
+
+  <div infinite-scroll='loadMore()' infinite-scroll-distance='0' infinite-scroll-container="'#list-wrapper'" infinite-scroll-parent="true">
+<table class="table table-filter ">
+  <tr>
+    <th>Edit</th>
+    <th>Delete</th>
+
+      <th>
+      Photo</th>
+    <th> <a  ng-click="sortType = 'name'; sortReverse = !sortReverse">
+    Name
+     
+    </a></th>
+    <th>
+     <a  ng-click="sortType = 'title'; sortReverse = !sortReverse">
+    Title
+    </a></th>
+     <th>
+      <a ng-click="sortType = 'phone'; sortReverse = !sortReverse">
+     Phone</a></th>
+     <th>
+      <a ng-click="sortType = 'email'; sortReverse = !sortReverse">
+     Email</a></th>
+     <th>
+       <a ng-click="sortType = 'manager'; sortReverse = !sortReverse">
+     Manger</a></th>
+      <th>
+       <a ng-click="sortType = 'report'; sortReverse = !sortReverse">
+     # of report</a></th>
+
+
+  </tr>
+   <tbody class='list' >
+  <tr ng-repeat="emp in emps |orderBy:sortType:sortReverse |
+  filter:searchEmp" >
+    <td>
+      <a href="#/edit/{{emp.id}}"><button class="w3-btn w3-ripple" >&#9998; Edit</button></a>
+    </td>
+    <td>
+      <button class="w3-btn w3-ripple" ng-click="deleteEmp(emp.id)">&#9998; Delete</button>
+    </td>
+    
+    <td><img src="{{emp.img_path}}" width="42" height="42"></td>
+    <td>{{ emp.name }}</td>
+    <td>{{ emp.title }}</td>
+    <td><a href="tel:+1{{emp.phone}}">{{ emp.phone }}</a></td>
+    <td><a href="mailto:{{emp.email}}?subject=hello {{emp.name}}&body=Dear {{emp.name}},">{{ emp.email }}</a></td>
+    <td><a href="#/manager/{{emp.manager.split('-')[1]}}">{{ emp.manager.split('-')[0] }}</a></td>
+    <td><a href="#/report/{{emp.name}}-{{emp.id}}">{{emp.report}}</a></td>
+    </tr>
+</tbody>
+
+
+
+  
+</table>
+
+</div>
+<br>
+<a href="#/new/"><button class="btn btn-primary" >&#9998; Create New Employee</button>
+</a>
+</div>
+
+
+
+</div>
+
+
+

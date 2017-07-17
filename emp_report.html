@@ -1,0 +1,66 @@
+
+<div>
+<div class="w3-container">
+
+<h3>Emps</h3>
+
+
+ 
+<form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search Employees" ng-model="searchEmp">
+      </div>      
+    </div>
+  </form>
+<table class="w3-table w3-bordered w3-striped">
+  <tr>
+   
+      <th>
+      Photo</th>
+    <th> <a  ng-click="sortType = 'name'; sortReverse = !sortReverse">
+    Name
+     
+    </a></th>
+    <th>
+     <a  ng-click="sortType = 'title'; sortReverse = !sortReverse">
+    Title
+    </a></th>
+     <th>
+      <a ng-click="sortType = 'phone'; sortReverse = !sortReverse">
+     Phone</a></th>
+     <th>
+      <a ng-click="sortType = 'email'; sortReverse = !sortReverse">
+     Email</a></th>
+     <th>
+       <a ng-click="sortType = 'manager'; sortReverse = !sortReverse">
+     Manger</a></th>
+      <th>
+       <a ng-click="sortType = 'report'; sortReverse = !sortReverse">
+     # of report</a></th>
+
+
+  </tr>
+
+  <tr ng-repeat="emp in emps |orderBy:sortType:sortReverse |
+  filter:searchEmp " >
+    
+    <!-- <td><img src="{{emp.img_path}}"></td> -->
+    <td><img src="{{emp.img_path}}" width="42" height="42"></td>
+    <td>{{ emp.name }}</td>
+    <td>{{ emp.title }}</td>
+    <td>{{ emp.phone }}</td>
+    <td>{{ emp.email }}</td>
+    <td><a href="#/manager/{{emp.manager.split('-')[1]}}">{{ emp.manager.split('-')[0] }}</td>
+    <td><a href="#/report/{{emp.name}}-{{emp.id}}">{{emp.report}}</a></td>
+
+  </tr>
+</table>
+<br>
+
+</div>
+
+
+
+</div>
